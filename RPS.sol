@@ -2,6 +2,8 @@
 
 pragma solidity >=0.7.0 <0.9.0;
 
+import "./CommitReveal.sol";
+
 contract RPS {
     struct Player {
         uint choice; // 0 - Rock, 1 - Paper , 2 - Scissors, 3 - undefined
@@ -25,6 +27,7 @@ contract RPS {
         require(numPlayer == 2);
         require(msg.sender == player[idx].addr);
         require(choice == 0 || choice == 1 || choice == 2);
+        require(idx == 0 || idx == 1);
         player[idx].choice = choice;
         numInput++;
         if (numInput == 2) {

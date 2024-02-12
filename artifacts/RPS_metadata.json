@@ -1,0 +1,142 @@
+{
+	"compiler": {
+		"version": "0.8.24+commit.e11b9ed9"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "addPlayer",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "choice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "idx",
+						"type": "uint256"
+					}
+				],
+				"name": "input",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "numInput",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "numPlayer",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "player",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "choice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "reward",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"RPS.sol": "RPS"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"CommitReveal.sol": {
+			"keccak256": "0xb0c4f0650e7874b369df73faca9bf9cff80c408075bca254ab6899634f511c8c",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://f8efdbfbe25eb915e7126ebe53292614098cc9f7b6ea31dd6a8270bf1c04ac56",
+				"dweb:/ipfs/QmUcZLCubCSQ3uk7YkFR4c9iXaNbCMJT5FYFZaNj5Va5zw"
+			]
+		},
+		"RPS.sol": {
+			"keccak256": "0xe1eef259e91c918e9ee1fd9b37184e64cb51930aa76cf90692acaef3a0f8bb9c",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://fa1289368c17fba756f593a2bc6486e7b5f27c0876e3b1d520dfb1db0b986dc9",
+				"dweb:/ipfs/QmQM15hN8bMhzw3RSHdnrFYmrw9G6FNutkB3ogPPgJYtKC"
+			]
+		}
+	},
+	"version": 1
+}
