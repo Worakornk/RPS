@@ -18,28 +18,30 @@ https://ku-edu.webex.com/ku-edu/ldr.php?RCID=eca90c62c633dc7be0d4a838c1b49fe4
 
 
 จากโค้ด RPS เราจะเห็นได้ว่ามันมีข้อบกพร่องด้านความปลอดภัยและความไม่สะดวกในการใช้งานดังต่อไปนี้
-ไม่มีใครอยากจะเลือกก่อน เพราะว่ากลัวถูกอีกคนทำ front-running (การได้ประโยชน์จากการรู้ล่วงหน้าว่าคนหนึ่งเลือกอะไร)
-ยากต่อการจะรู้ว่าเราใคร account ไหนเป็น idx ที่ 0 หรือ 1
-เงินของ player 0 อาจถูกล๊อกไว้ ถ้าไม่มี player 1 มาลงขันต่อ
-กรณีได้ player ทั้ง 2 แล้ว แต่มีเพียง player เดียวที่ลง choice มา แต่อีก player ไม่ยอมเรียก input function เพื่อส่ง choice มาให้ smart contract ได้ตัดสินแพ้ ชนะ เสมอ เช่นนี้ทำให้เงิน ETH ของทุกคนที่ลงขันมาถูกล็อกไว้โดยไม่มีใครถอนออกมาได้
-ทำยังไงให้ contract นี้(มีการ transact กับมัน) ได้ในหลายๆ รอบโดยที่ไม่ต้องมีการ deploy ใหม่เสมอในทุกๆครั้งที่ต้องการเล่น
+1. ไม่มีใครอยากจะเลือกก่อน เพราะว่ากลัวถูกอีกคนทำ front-running (การได้ประโยชน์จากการรู้ล่วงหน้าว่าคนหนึ่งเลือกอะไร)
+2. ยากต่อการจะรู้ว่าเราใคร account ไหนเป็น idx ที่ 0 หรือ 1
+3. เงินของ player 0 อาจถูกล๊อกไว้ ถ้าไม่มี player 1 มาลงขันต่อ
+4. กรณีได้ player ทั้ง 2 แล้ว แต่มีเพียง player เดียวที่ลง choice มา แต่อีก player ไม่ยอมเรียก input function เพื่อส่ง choice มาให้ smart contract ได้ตัดสินแพ้ ชนะ เสมอ เช่นนี้ทำให้เงิน ETH ของทุกคนที่ลงขันมาถูกล็อกไว้โดยไม่มีใครถอนออกมาได้
+5. ทำยังไงให้ contract นี้(มีการ transact กับมัน) ได้ในหลายๆ รอบโดยที่ไม่ต้องมีการ deploy ใหม่เสมอในทุกๆครั้งที่ต้องการเล่น
+
 
 
 ### สิ่งที่ต้องทำ ###
-Clone ตัว RPS github repo จากลิงค์ด้านบน แล้วทำการดัดแปลงโค้ด Solidity เพื่อแก้ปัญหาทั้ง 5 ข้อที่ได้กล่าวมา\
-แก้ปัญหา front-running โดยใช้กระบวนการ commit-reveal (ตามที่เราได้คุยกันในเลคเชอร์เรื่อง cryptography) ขอให้ใช้โค้ด commit-reveal ที่ให้มาโดย import เข้ามาในโค้ด RPS หลัก เมื่อแก้ปัญหานี้ได้แล้ว ให้ทำ git commit แล้วเขียน commit message ที่เหมาะสม\
-แก้ปัญหาการล๊อกเงิน ETH ที่ player ลงขันเข้ามา ให้กำหนดระยะเวลาว่าหลังจาก X minutes (หรือ hours หรือ days) ผ่านไปหลังจาก block.timestamp ที่มีการเรียก transaction ที่เกี่ยวข้อง ให้คืนเงิน ETH กลับไปให้ผู้เล่น\ หรือลงโทษผู้เล่นที่ไม่ทำตามกติกาโดยนำเงิน ETH ทั้งหมดให้กับผู้เล่นที่ทำตามกติกา เมื่อแก้ปัญหานี้ได้แล้ว ให้ทำ git commit แล้วเขียน commit message ที่เหมาะสม\
-ทำให้เกมส์มีความซับซ้อนมากยิ่งขึ้น โดยแทนที่จะมีตัวเลือกแค่ Rock Paper และ Scissors 
+- Clone ตัว RPS github repo จากลิงค์ด้านบน แล้วทำการดัดแปลงโค้ด Solidity เพื่อแก้ปัญหาทั้ง 5 ข้อที่ได้กล่าวมา
+- แก้ปัญหา front-running โดยใช้กระบวนการ commit-reveal (ตามที่เราได้คุยกันในเลคเชอร์เรื่อง cryptography) ขอให้ใช้โค้ด commit-reveal ที่ให้มาโดย import เข้ามาในโค้ด RPS หลัก เมื่อแก้ปัญหานี้ได้แล้ว ให้ทำ git commit แล้วเขียน commit message ที่เหมาะสม
+- แก้ปัญหาการล๊อกเงิน ETH ที่ player ลงขันเข้ามา ให้กำหนดระยะเวลาว่าหลังจาก X minutes (หรือ hours หรือ days) ผ่านไปหลังจาก block.timestamp ที่มีการเรียก transaction ที่เกี่ยวข้อง ให้คืนเงิน ETH กลับไปให้ผู้เล่น
+- หรือลงโทษผู้เล่นที่ไม่ทำตามกติกาโดยนำเงิน ETH ทั้งหมดให้กับผู้เล่นที่ทำตามกติกา เมื่อแก้ปัญหานี้ได้แล้ว ให้ทำ git commit แล้วเขียน commit message ที่เหมาะสม
+- ทำให้เกมส์มีความซับซ้อนมากยิ่งขึ้น โดยแทนที่จะมีตัวเลือกแค่ Rock Paper และ Scissors 
 เราจะเป็นเกมส์ที่มีตัวเลือก 7 ตัว Rock Water Air Paper Sponge Scissors และ Fire 
 
-โดยมีกฏเกณฑ์การแพ้ ชนะ ดังต่อไปนี้\
-ROCK POUNDS OUT FIRE, CRUSHES SCISSORS & SPONGE.\
-FIRE MELTS SCISSORS, BURNS PAPER & SPONGE.\
-SCISSORS SWISH THROUGH AIR, CUT PAPER & SPONGE.\
-SPONGE SOAKS PAPER, USES AIR POCKETS, ABSORBS WATER.\
-PAPER FANS AIR, COVERS ROCK, FLOATS ON WATER.\
-AIR BLOWS OUT FIRE, ERODES ROCK, EVAPORATES WATER.\
-WATER ERODES ROCK, PUTS OUT FIRE, RUSTS SCISSORS.
+โดยมีกฏเกณฑ์การแพ้ ชนะ ดังต่อไปนี้
+- ROCK POUNDS OUT FIRE, CRUSHES SCISSORS & SPONGE.
+- FIRE MELTS SCISSORS, BURNS PAPER & SPONGE.
+- SCISSORS SWISH THROUGH AIR, CUT PAPER & SPONGE.
+- SPONGE SOAKS PAPER, USES AIR POCKETS, ABSORBS WATER.
+- PAPER FANS AIR, COVERS ROCK, FLOATS ON WATER.
+- AIR BLOWS OUT FIRE, ERODES ROCK, EVAPORATES WATER.
+- WATER ERODES ROCK, PUTS OUT FIRE, RUSTS SCISSORS.
 
 กราฟแสดงความสัมพันธ์การแพ้ ชนะ ของตัวเลือกทั้ง 7 เป็นไปตามแผนภาพต่อไปนี้
 ![alt text](image.png)
@@ -112,11 +114,15 @@ function addPlayer() public payable {
 event playerAdded(uint256 id, address addr);
 ```
 ### getHashedChoiceWithSalt
+- เอา Choice ที่เป็น `uint64` แทน `uint256` อันเดิม มา encrypt กับ `string memory salt` เพื่อเพิ่มความปลอดภัย ป้องกันคนมาแอบดูตัวเลือกของผู้เล่นคนก่อนหน้า
+- ตั้งค่าเป็น `external` `pure`
+- `bytes32 encodedSalt = bytes32(abi.encodePacked(salt));` เอา string salt มาเปลี่ยนเป็น byte32 หลังจาก encode แล้ว
+- `return keccak256(abi.encodePacked(choice, encodedSalt));` เอาัวเลขที่ได้มา encode กับ choice ที่ผู้เล่นเลือกมา
 
 ```
 // Encrypt input with salt
 
-function getHashedChoiceWithSalt(uint64 choice, string memory salt)
+function getHashedChoiceWithSalt(uint64 choice, string memory salt) 
     external
     pure
     returns (bytes32)
@@ -125,6 +131,9 @@ function getHashedChoiceWithSalt(uint64 choice, string memory salt)
 }
 ```
 ### Input_HashedChoice
+- เปลี่ยน input จากเดิมที่รับ `uint256` มารับ `byte32` (ค่าที่ได้จากฟังก์ชชั่น `getHashedChoiceWithSalt()`)
+- เรียกใช้ `getHash` event จาก CommitReveal.sol
+- Update `lastActionTime` ให้ตรงกับเวลาปัจจุบัน
 ```
 // Takes uint64 choices and turn it into encoded salt
 
@@ -139,6 +148,16 @@ function Input_HashedChoice(bytes32 hashed_salted_choice, uint256 idx) public  {
 }
 ```
 ### revealChoice
+- รับค่า `uint64 choice` `string memory salt` `uint256 idx`
+- เช็คเงื่อนไขสามประการ: 
+    - จำนวนผู้เลนครบ 2 คนมั้ย `require(numPlayer == 2, "Only playable if there are 2 players in total");`
+    - ผู้ใช้คำสั่งตรงกับผู้เล่นมั้ย `require(msg.sender == player[idx].addr);`
+    - ตัวเลือกเป็นค่า 0-6 ซึ่งเราให้ `0 - Rock` `1 - Fire` `2 - Scissors` `3 - Sponge` `4 - Paper` `5 - Air` `6 - Water`
+    - เรียกใช้ `reveal()` จาก CommitReveal.sol เพื่อเปลี่ยนจาก byte32 เป็นค่า uint256 ซึ่งเราเอาไปใช้ดูต่อได้
+    - เรียกใช้ event `RevealChoice()`
+    - Update `lastActionTime` ให้ตรงกับเวลาปัจจุบัน
+    - เช็คว่าผู้เล่นเปิดตัวเลือกของตัวเองทั้งคู่รึยัง ถ้าเปิดแล้วก็เช็คผู้ชนะได้เลย 
+
 ```
 function revealChoice(
         uint64 choice,
@@ -163,6 +182,12 @@ function revealChoice(
     event RevealChoice(uint256 idx, uint256 choice);
 ```
 ### _checkWinnerAndPay()
+-  สมการที่ใช้เช็คการแพ้ชนะคือ `diff = ( p1Choice + 7 - p0Choice ) % 7 ` เมื่อ `p0Choice` `p1Choice` คือตัวเลือกที่ถอดรหัสแล้วของ player คนแรกและคนที่สองตามลำดับ โดยถ้า
+    - `diff == 0` = เสมอ
+    - `diff > 3` = player[1] ชนะ
+    - `diff <= 3` = player[0] ชนะ
+- จ่ายเงินแล้วให้เรียก event `Winner`
+- เริ่มเกมใหม่
 ```
 function _checkWinnerAndPay() private {
         uint64 p0Choice = player[0].choice;
@@ -195,6 +220,18 @@ function _checkWinnerAndPay() private {
     event Winner(uint256 Winner, uint64 p0Choice, uint64 p1Choice);
 ```
 ### gameUncomplete_returnMoney()
+ใช้แก้ปัญหาเงินค้างในระบบเนื่องจากมีผู้เล่นไม่ใส่คำตอบ ไม่เปิดคำตอบ หรือไม่เข้าเกม ภายในเวลาที่กำหนด
+- เช็คก่อนเลยว่าเวลาหมดหรือยังด้วย `require(block.timestamp - lastActionTime > ALLOWED_IDLE_TIME, "Still have time left!!!");`
+- เช็คว่าเกมนี้มีผู้เล่นหรือไม่
+- ต่อมาเป็นขั้นตอนการคืนเงิน 3 กรณี
+    - มีผู้เล่นในเกมแค่คนเดียว
+    - ทั้งคู่ไม่ใส่คำตอบให้ทันเวลา 
+    - ทั้งคู่ไม่เปิดเผยคำตอบให้ทันเวลา 
+- สุดท้ายเป็นกรณีที่จะลงโทษผู้เล่นที่
+    - ไม่ใส่ตัวเลือกให้ทันเวลา 
+    - ไม่เปิดเผยคำตอบให้ทันเวลา 
+- เริ่มเกมใหม่
+
 ```
 function gameUncomplete_returnMoney() public {
         // Timeout!
